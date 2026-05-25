@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>A Secret for You 💌</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<title>A Secret for My Bestie 💌</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Dancing+Script:wght@600;700&family=Nunito:wght@300;400;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -35,6 +35,23 @@ body::before{
 #bg-hearts{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .bgh{position:absolute;font-size:1.2rem;opacity:.07;animation:bgDrift linear infinite}
 @keyframes bgDrift{0%{transform:translateY(100vh) rotate(0)}100%{transform:translateY(-10vh) rotate(360deg)}}
+
+/* Additional floating aesthetic hearts */
+.floating-accent-hearts {
+  position:fixed; inset:0; pointer-events:none; z-index:1;
+}
+.accent-heart {
+  position:absolute;
+  font-size: 1rem;
+  opacity: 0.15;
+  animation: floatHeartSlow 25s linear infinite;
+}
+@keyframes floatHeartSlow {
+  0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.15; }
+  90% { opacity: 0.15; }
+  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
 
 /* ═══ AMBIENT BLOBS ═══ */
 #ambient{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
@@ -190,29 +207,23 @@ section{padding:5rem 1.5rem;position:relative}
   background:var(--wribbon);
 }
 
-/* ═══ CAKE SECTION ═══ */
+
 #cake-sec{
   background:radial-gradient(ellipse at 50% 30%,#330040 0%,#0d0018 100%);
   text-align:center;
 }
 .cake-stage{max-width:500px;margin:0 auto;position:relative}
-.cake-name-input{
-  background:rgba(255,255,255,.1);
-  border:2px solid rgba(255,215,0,.35);
-  border-radius:999px;
-  padding:.7rem 1.5rem;
-  color:white;
+.hardcoded-name{
   font-family:'Dancing Script',cursive;
-  font-size:1.3rem;
-  text-align:center;
-  outline:none;
-  width:100%;max-width:280px;
-  margin-bottom:1.5rem;
-  transition:border-color .3s;
-  backdrop-filter:blur(8px);
+  font-size:1.8rem;
+  color:var(--gold);
+  background:rgba(0,0,0,0.3);
+  display:inline-block;
+  padding:0.3rem 1.8rem;
+  border-radius:999px;
+  margin-bottom:1rem;
+  backdrop-filter:blur(4px);
 }
-.cake-name-input::placeholder{color:rgba(255,255,255,.4)}
-.cake-name-input:focus{border-color:var(--gold)}
 .blow-btn{
   background:linear-gradient(135deg,#FF4F7B,#FFD700);
   border:none;border-radius:999px;
@@ -311,6 +322,7 @@ footer::before{
 
 <!-- BG HEARTS -->
 <div id="bg-hearts"></div>
+<div class="floating-accent-hearts" id="accentHearts"></div>
 <div id="ambient">
   <div class="amb" style="width:600px;height:600px;background:#7b2d8b;left:-200px;top:-200px;animation-duration:7s"></div>
   <div class="amb" style="width:500px;height:500px;background:#c0415a;right:-150px;top:30%;animation-duration:9s;animation-delay:-3s"></div>
@@ -359,7 +371,7 @@ footer::before{
     <div class="burst-text">Happy Birthday!</div>
     <div class="burst-sub">✨ You unlocked your special day ✨</div>
     <div class="burst-hearts">💖 🌟 💖 🌟 💖</div>
-    <button class="burst-continue" onclick="enterMain()">Enter Your Celebration 🌹</button>
+    <button class="burst-continue" onclick="enterMain()">Start Your Celebration 🌹</button>
   </div>
 </div>
 
@@ -371,8 +383,8 @@ footer::before{
   <div class="star-bg" id="stars"></div>
   <div class="floating-hearts" id="fhearts"></div>
   <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center">
-    <p class="hero-name">✨ For the most wonderful person ✨</p>
-    <h1 class="hero-title">Happy Birthday</h1>
+    <p class="hero-name">✨ For the most wonderful Person ✨</p>
+    <h1 class="hero-title">Happiest Birthday</h1>
     <p class="hero-date">Today is all about you</p>
     <div class="bear-scene">
       <svg width="260" height="300" viewBox="0 0 300 320" xmlns="http://www.w3.org/2000/svg">
@@ -418,7 +430,7 @@ footer::before{
   </div>
 </section>
 
-<!-- GIFTS SECTION -->
+<!-- GIFTS SECTION - Updated messages as Bestie -->
 <section id="gifts">
   <div style="max-width:1000px;margin:0 auto">
     <div class="reveal">
@@ -431,56 +443,56 @@ footer::before{
         <div class="gift-tag">Heartfelt</div>
         <div class="gift-box-3d" id="g1" onclick="openGift('g1','gm1','🌹')">🎁</div>
         <h3 class="gift-title">A Bouquet of Roses</h3>
-        <div class="gift-msg" id="gm1"><p style="color:rgba(255,210,220,.8);line-height:1.8;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1rem">"A thousand roses couldn't match your beauty, but let this be a reminder — you bloom wherever you go, and the world is more colourful because of you." 🌹🌹🌹</p></div>
+        <div class="gift-msg" id="gm1"><p style="color:rgba(255,210,220,.8);line-height:1.8;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1rem">"To my special one, u have become more than a mam for me. You've bloomed into the most important part of my life. Our bond is a garden of memories that distance will never fade. I respect you deeply and  endlessly." 🌹💕</p></div>
       </div>
       <div class="gift-card" style="--card-bg:linear-gradient(135deg,rgba(200,162,200,.1),rgba(150,100,200,.05))">
         <div class="gift-ribbon" style="--ribbon-color:rgba(200,162,200,.35)"></div>
         <div class="gift-tag" style="background:rgba(200,162,200,.15);color:var(--lilac);border-color:rgba(200,162,200,.3)">Cozy</div>
         <div class="gift-box-3d" id="g2" onclick="openGift('g2','gm2','🧸')">🎀</div>
-        <h3 class="gift-title">A Cuddle Teddy Bear</h3>
-        <div class="gift-msg" id="gm2"><p style="color:rgba(220,200,255,.8);line-height:1.8;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1rem">"This soft little bear carries all my hugs for whenever you need one. Squeeze it on a tough day — someone is rooting for you with their whole heart." 🧸💜</p></div>
+        <h3 class="gift-title">A Teddy Bear</h3>
+        <div class="gift-msg" id="gm2"><p style="color:rgba(220,200,255,.8);line-height:1.8;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1rem">"This soft bear carries all the love and respect I have for you. Keep it close, it holds my promise that I'll always be rooting for you, no matter where we are." 🧸💜</p></div>
       </div>
       <div class="gift-card" style="--card-bg:linear-gradient(135deg,rgba(152,245,225,.08),rgba(78,205,196,.05))">
         <div class="gift-ribbon" style="--ribbon-color:rgba(152,245,225,.3)"></div>
         <div class="gift-tag" style="background:rgba(152,245,225,.1);color:var(--mint);border-color:rgba(152,245,225,.3)">Magical</div>
         <div class="gift-box-3d" id="g3" onclick="openGift('g3','gm3','⭐')">🎊</div>
         <h3 class="gift-title">A Jar of Stars</h3>
-        <div class="gift-msg" id="gm3"><p style="color:rgba(200,255,240,.8);line-height:1.8;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1rem">"Every star in this jar is a wish I'm sending your way — for love, laughter, health, and every dream you've ever dared to dream." ⭐🌙✨</p></div>
+        <div class="gift-msg" id="gm3"><p style="color:rgba(200,255,240,.8);line-height:1.8;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1rem">"Every star in this jar is a wish for your happiness, your health, and your dreams. You've guided me like a star, now let them guide you to everything you deserve." ⭐🌙✨</p></div>
       </div>
       <div class="gift-card" style="--card-bg:linear-gradient(135deg,rgba(255,150,100,.08),rgba(255,100,100,.05))">
         <div class="gift-ribbon" style="--ribbon-color:rgba(255,150,100,.35)"></div>
         <div class="gift-tag" style="background:rgba(255,150,100,.1);color:#FFB08C;border-color:rgba(255,150,100,.3)">Sweet</div>
         <div class="gift-box-3d" id="g4" onclick="openGift('g4','gm4','🎂')">🎈</div>
         <h3 class="gift-title">Birthday Cake & Cookies</h3>
-        <div class="gift-msg" id="gm4"><p style="color:rgba(255,230,210,.8);line-height:1.8;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1rem">"A slice of the most delicious cake — baked with love, frosted with affection, topped with a candle for every beautiful year of you. Make a wish!" 🎂🍪💛</p></div>
+        <div class="gift-msg" id="gm4"><p style="color:rgba(255,230,210,.8);line-height:1.8;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1rem">"A slice of cake for the one who makes life sweeter just by being in it. Make a wish, I hope every single one of them comes true." 🎂🍪💛</p></div>
       </div>
       <div class="gift-card" style="--card-bg:linear-gradient(135deg,rgba(255,79,123,.08),rgba(255,150,200,.05))">
         <div class="gift-ribbon" style="--ribbon-color:rgba(255,79,123,.3)"></div>
         <div class="gift-tag" style="background:rgba(255,79,123,.1);color:#FF9BBB;border-color:rgba(255,79,123,.3)">Forever</div>
         <div class="gift-box-3d" id="g5" onclick="openGift('g5','gm5','💌')">💝</div>
-        <h3 class="gift-title">A Love Letter</h3>
-        <div class="gift-msg" id="gm5"><p style="color:rgba(255,220,230,.8);line-height:1.8;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1rem">"Words fall short when I try to tell you how extraordinary you are. You are loved more deeply than the ocean, more constantly than the stars." 💌💖</p></div>
+        <h3 class="gift-title">A Friendship Letter</h3>
+        <div class="gift-msg" id="gm5"><p style="color:rgba(255,220,230,.8);line-height:1.8;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1rem">"You went from being someone I looked up to, to my safest place. Words can't cover how much you mean to me. You are deeply loved, truly respected, and my best friend for life." 💌💖</p></div>
       </div>
       <div class="gift-card" style="--card-bg:linear-gradient(135deg,rgba(255,215,0,.1),rgba(200,100,200,.05))">
         <div class="gift-ribbon" style="--ribbon-color:rgba(255,215,0,.4)"></div>
         <div class="gift-tag">Golden</div>
         <div class="gift-box-3d" id="g6" onclick="openGift('g6','gm6','🏆')">✨</div>
         <h3 class="gift-title">Golden Memories</h3>
-        <div class="gift-msg" id="gm6"><p style="color:rgba(255,250,210,.8);line-height:1.8;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1rem">"Every moment we've shared has become gold in my memory. I carry them everywhere — and I can't wait to create a thousand more with you." 🥂🌟✨</p></div>
+        <div class="gift-msg" id="gm6"><p style="color:rgba(255,250,210,.8);line-height:1.8;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1rem">"Every moment we've shared is gold. I carry them everywhere. Even as we walk different paths, our bond remains a treasure I'll always hold close." 🥂🌟✨</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- BIG CAKE SECTION -->
+
 <section id="cake-sec">
   <div style="max-width:600px;margin:0 auto">
     <div class="reveal">
       <h2 class="sec-title">Make a Wish!</h2>
-      <p class="sec-sub">Enter your name and blow out the candles 🕯️</p>
+      <p class="sec-sub">Blow out the candles, Janaab 🕯️</p>
     </div>
     <div class="cake-stage reveal">
-      <input class="cake-name-input" id="cakeName" type="text" placeholder="Your name here ✨" maxlength="25" autocomplete="off">
+      <div class="hardcoded-name">🎂 For My Best Person 🎂</div>
 
       <!-- BIG SVG CAKE -->
       <svg id="bigCake" width="100%" viewBox="0 0 420 360" xmlns="http://www.w3.org/2000/svg" style="max-width:420px;display:block;margin:0 auto;filter:drop-shadow(0 0 40px rgba(255,100,150,.35))">
@@ -489,9 +501,7 @@ footer::before{
         <!-- Bottom tier -->
         <rect x="40" y="240" width="340" height="108" rx="14" fill="#E84393"/>
         <rect x="40" y="240" width="340" height="26" rx="8" fill="#FF6FBB"/>
-        <!-- Bottom frosting drips -->
         <path d="M40 266 Q58 282 76 266 Q94 282 112 266 Q130 282 148 266 Q166 282 184 266 Q202 282 220 266 Q238 282 256 266 Q274 282 292 266 Q310 282 328 266 Q346 282 364 266 Q373 278 380 266" fill="none" stroke="white" stroke-width="8" stroke-linecap="round"/>
-        <!-- Bottom tier deco dots -->
         <circle cx="80" cy="300" r="6" fill="white" opacity=".4"/>
         <circle cx="120" cy="310" r="5" fill="#FFD700" opacity=".6"/>
         <circle cx="160" cy="296" r="7" fill="white" opacity=".35"/>
@@ -500,90 +510,47 @@ footer::before{
         <circle cx="280" cy="307" r="5" fill="#FFD700" opacity=".6"/>
         <circle cx="320" cy="298" r="7" fill="white" opacity=".35"/>
         <circle cx="360" cy="306" r="5" fill="#FFB6C1" opacity=".6"/>
-        <!-- Sprinkles bottom -->
         <rect x="65" y="325" width="14" height="5" rx="3" fill="#98F5E1" transform="rotate(30 72 327)"/>
         <rect x="110" y="330" width="12" height="4" rx="2" fill="#FFD700" transform="rotate(-20 116 332)"/>
         <rect x="180" y="322" width="14" height="5" rx="3" fill="#FF4F7B" transform="rotate(15 187 324)"/>
         <rect x="250" y="328" width="12" height="4" rx="2" fill="#C8A2C8" transform="rotate(-30 256 330)"/>
         <rect x="320" y="323" width="13" height="4" rx="2" fill="#98F5E1" transform="rotate(25 326 325)"/>
 
-        <!-- Middle tier -->
         <rect x="90" y="155" width="240" height="90" rx="12" fill="#FF4F7B"/>
         <rect x="90" y="155" width="240" height="22" rx="6" fill="#FF8FAD"/>
-        <!-- Middle frosting drips -->
         <path d="M90 177 Q108 192 126 177 Q144 192 162 177 Q180 192 198 177 Q216 192 234 177 Q252 192 270 177 Q288 192 306 177 Q320 191 330 177" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
-        <!-- Middle hearts deco -->
         <text x="115" y="220" font-size="16" opacity=".5">❤</text>
         <text x="152" y="228" font-size="14" opacity=".4">💕</text>
         <text x="195" y="218" font-size="18" opacity=".5">❤</text>
         <text x="238" y="226" font-size="14" opacity=".4">💕</text>
         <text x="278" y="217" font-size="16" opacity=".5">❤</text>
 
-        <!-- Top tier -->
         <rect x="135" y="80" width="150" height="80" rx="10" fill="#C0415A"/>
         <rect x="135" y="80" width="150" height="18" rx="5" fill="#E06080"/>
-        <!-- Top frosting -->
         <path d="M135 98 Q151 112 167 98 Q183 112 199 98 Q215 112 231 98 Q243 111 250 98 Q258 110 265 98 Q272 109 278 98 Q281 107 285 98" fill="none" stroke="white" stroke-width="6" stroke-linecap="round"/>
-        <!-- Stars top tier -->
         <text x="152" y="148" font-size="13" opacity=".6">⭐</text>
         <text x="190" y="143" font-size="15" opacity=".7">✨</text>
         <text x="228" y="148" font-size="13" opacity=".6">⭐</text>
 
-        <!-- 5 CANDLES on top tier -->
         <rect x="153" y="52" width="10" height="32" rx="3" fill="#FF6B6B"/>
         <rect x="173" y="46" width="10" height="38" rx="3" fill="#FFD700"/>
         <rect x="193" y="52" width="10" height="32" rx="3" fill="#98F5E1"/>
         <rect x="213" y="46" width="10" height="38" rx="3" fill="#C8A2C8"/>
         <rect x="233" y="52" width="10" height="32" rx="3" fill="#FF4F7B"/>
 
-        <!-- Candle stripes -->
         <rect x="153" y="60" width="10" height="4" rx="1" fill="rgba(255,255,255,.4)"/>
         <rect x="173" y="55" width="10" height="4" rx="1" fill="rgba(255,255,255,.4)"/>
         <rect x="193" y="60" width="10" height="4" rx="1" fill="rgba(255,255,255,.4)"/>
         <rect x="213" y="55" width="10" height="4" rx="1" fill="rgba(255,255,255,.4)"/>
         <rect x="233" y="60" width="10" height="4" rx="1" fill="rgba(255,255,255,.4)"/>
 
-        <!-- FLAMES — each has class candle-flame-el and unique id -->
-        <!-- Flame 1 -->
-        <g class="candle-flame-el" id="fl1">
-          <ellipse cx="158" cy="46" rx="5.5" ry="9" fill="#FFD700"/>
-          <ellipse cx="158" cy="44" rx="3.5" ry="6" fill="#FF6B00"/>
-          <ellipse cx="158" cy="43" rx="1.8" ry="3" fill="white" opacity=".85"/>
-          <ellipse cx="158" cy="50" rx="2.5" ry="2" fill="rgba(255,200,0,.3)"/>
-        </g>
-        <!-- Flame 2 -->
-        <g class="candle-flame-el" id="fl2">
-          <ellipse cx="178" cy="40" rx="5.5" ry="9" fill="#FFD700"/>
-          <ellipse cx="178" cy="38" rx="3.5" ry="6" fill="#FF6B00"/>
-          <ellipse cx="178" cy="37" rx="1.8" ry="3" fill="white" opacity=".85"/>
-          <ellipse cx="178" cy="44" rx="2.5" ry="2" fill="rgba(255,200,0,.3)"/>
-        </g>
-        <!-- Flame 3 -->
-        <g class="candle-flame-el" id="fl3">
-          <ellipse cx="198" cy="46" rx="5.5" ry="9" fill="#FFD700"/>
-          <ellipse cx="198" cy="44" rx="3.5" ry="6" fill="#FF6B00"/>
-          <ellipse cx="198" cy="43" rx="1.8" ry="3" fill="white" opacity=".85"/>
-          <ellipse cx="198" cy="50" rx="2.5" ry="2" fill="rgba(255,200,0,.3)"/>
-        </g>
-        <!-- Flame 4 -->
-        <g class="candle-flame-el" id="fl4">
-          <ellipse cx="218" cy="40" rx="5.5" ry="9" fill="#FFD700"/>
-          <ellipse cx="218" cy="38" rx="3.5" ry="6" fill="#FF6B00"/>
-          <ellipse cx="218" cy="37" rx="1.8" ry="3" fill="white" opacity=".85"/>
-          <ellipse cx="218" cy="44" rx="2.5" ry="2" fill="rgba(255,200,0,.3)"/>
-        </g>
-        <!-- Flame 5 -->
-        <g class="candle-flame-el" id="fl5">
-          <ellipse cx="238" cy="46" rx="5.5" ry="9" fill="#FFD700"/>
-          <ellipse cx="238" cy="44" rx="3.5" ry="6" fill="#FF6B00"/>
-          <ellipse cx="238" cy="43" rx="1.8" ry="3" fill="white" opacity=".85"/>
-          <ellipse cx="238" cy="50" rx="2.5" ry="2" fill="rgba(255,200,0,.3)"/>
-        </g>
+        <g class="candle-flame-el" id="fl1"><ellipse cx="158" cy="46" rx="5.5" ry="9" fill="#FFD700"/><ellipse cx="158" cy="44" rx="3.5" ry="6" fill="#FF6B00"/><ellipse cx="158" cy="43" rx="1.8" ry="3" fill="white" opacity=".85"/></g>
+        <g class="candle-flame-el" id="fl2"><ellipse cx="178" cy="40" rx="5.5" ry="9" fill="#FFD700"/><ellipse cx="178" cy="38" rx="3.5" ry="6" fill="#FF6B00"/><ellipse cx="178" cy="37" rx="1.8" ry="3" fill="white" opacity=".85"/></g>
+        <g class="candle-flame-el" id="fl3"><ellipse cx="198" cy="46" rx="5.5" ry="9" fill="#FFD700"/><ellipse cx="198" cy="44" rx="3.5" ry="6" fill="#FF6B00"/><ellipse cx="198" cy="43" rx="1.8" ry="3" fill="white" opacity=".85"/></g>
+        <g class="candle-flame-el" id="fl4"><ellipse cx="218" cy="40" rx="5.5" ry="9" fill="#FFD700"/><ellipse cx="218" cy="38" rx="3.5" ry="6" fill="#FF6B00"/><ellipse cx="218" cy="37" rx="1.8" ry="3" fill="white" opacity=".85"/></g>
+        <g class="candle-flame-el" id="fl5"><ellipse cx="238" cy="46" rx="5.5" ry="9" fill="#FFD700"/><ellipse cx="238" cy="44" rx="3.5" ry="6" fill="#FF6B00"/><ellipse cx="238" cy="43" rx="1.8" ry="3" fill="white" opacity=".85"/></g>
 
-        <!-- "Happy Birthday" on cake -->
-        <text x="210" y="128" font-family="Dancing Script,cursive" font-size="15" fill="white" opacity=".85" text-anchor="middle" font-weight="600">Happy Birthday</text>
-
-        <!-- Decorative side flowers -->
+        <text x="210" y="128" font-family="Dancing Script,cursive" font-size="15" fill="white" opacity=".85" text-anchor="middle" font-weight="600">Happy Birthday Maam</text>
         <text x="22" y="280" font-size="22" opacity=".6">🌸</text>
         <text x="375" y="275" font-size="20" opacity=".55">🌺</text>
         <text x="18" y="200" font-size="18" opacity=".5">✨</text>
@@ -612,33 +579,26 @@ footer::before{
       <!-- LEFT: Balloons bunch -->
       <div class="teddy-side" style="flex:0 0 auto;padding-bottom:20px">
         <svg width="160" height="280" viewBox="0 0 160 280" xmlns="http://www.w3.org/2000/svg">
-          <!-- Strings converge to hand point -->
           <line x1="45" y1="70" x2="100" y2="255" stroke="#FFD700" stroke-width="1.4" stroke-dasharray="4,3"/>
           <line x1="80" y1="55" x2="100" y2="255" stroke="#FF4F7B" stroke-width="1.4" stroke-dasharray="4,3"/>
           <line x1="115" y1="65" x2="100" y2="255" stroke="#98F5E1" stroke-width="1.4" stroke-dasharray="4,3"/>
           <line x1="140" y1="80" x2="100" y2="255" stroke="#C8A2C8" stroke-width="1.4" stroke-dasharray="4,3"/>
           <line x1="25" y1="95" x2="100" y2="255" stroke="#FF6B6B" stroke-width="1.4" stroke-dasharray="4,3"/>
-          <!-- Balloon 1 red heart -->
           <ellipse cx="45" cy="50" rx="26" ry="30" fill="#FF4F7B"/>
           <ellipse cx="37" cy="42" rx="10" ry="13" fill="#FF6FA0" opacity=".5"/>
           <text x="45" y="58" font-size="18" text-anchor="middle" opacity=".9">❤</text>
-          <!-- Balloon 2 gold -->
           <ellipse cx="80" cy="38" rx="24" ry="28" fill="#FFD700"/>
           <ellipse cx="73" cy="31" rx="9" ry="11" fill="#FFE44D" opacity=".5"/>
           <text x="80" y="46" font-size="16" text-anchor="middle" opacity=".9">⭐</text>
-          <!-- Balloon 3 mint -->
           <ellipse cx="115" cy="48" rx="25" ry="29" fill="#98F5E1"/>
           <ellipse cx="108" cy="41" rx="9" ry="11" fill="#C0FAF0" opacity=".5"/>
           <text x="115" y="56" font-size="15" text-anchor="middle" opacity=".9">💫</text>
-          <!-- Balloon 4 lilac -->
           <ellipse cx="140" cy="64" rx="22" ry="26" fill="#C8A2C8"/>
           <ellipse cx="134" cy="57" rx="8" ry="10" fill="#DFC0DF" opacity=".5"/>
           <text x="140" y="71" font-size="14" text-anchor="middle" opacity=".9">🌟</text>
-          <!-- Balloon 5 coral small -->
           <ellipse cx="25" cy="78" rx="20" ry="23" fill="#FF6B6B"/>
           <ellipse cx="19" cy="72" rx="7" ry="9" fill="#FF9090" opacity=".5"/>
           <text x="25" y="85" font-size="13" text-anchor="middle" opacity=".9">✨</text>
-          <!-- Hand/paw hint -->
           <circle cx="100" cy="260" r="10" fill="#D2691E" opacity=".7"/>
           <circle cx="92" cy="265" r="5" fill="#A06830" opacity=".5"/>
           <circle cx="100" cy="270" r="5" fill="#A06830" opacity=".5"/>
@@ -663,9 +623,7 @@ footer::before{
           <path d="M153 213 Q170 228 187 213" fill="none" stroke="#2a1000" stroke-width="3" stroke-linecap="round"/>
           <ellipse cx="132" cy="208" rx="16" ry="10" fill="#FF8888" opacity=".45"/>
           <ellipse cx="208" cy="208" rx="16" ry="10" fill="#FF8888" opacity=".45"/>
-          <!-- Left arm UP holding balloon strings -->
           <ellipse cx="80" cy="255" rx="24" ry="50" fill="#C4813A" transform="rotate(-35 80 255)"/>
-          <!-- Right arm UP holding bouquet -->
           <ellipse cx="260" cy="255" rx="24" ry="50" fill="#C4813A" transform="rotate(35 260 255)"/>
           <path d="M148 240 Q170 228 192 240 Q170 252 148 240Z" fill="#FF4F7B"/>
           <circle cx="170" cy="240" r="7" fill="#FFD700"/>
@@ -673,7 +631,6 @@ footer::before{
           <ellipse cx="202" cy="352" rx="34" ry="22" fill="#C4813A"/>
           <circle cx="128" cy="358" r="5" fill="#A06830"/><circle cx="140" cy="363" r="5" fill="#A06830"/><circle cx="152" cy="360" r="5" fill="#A06830"/>
           <circle cx="192" cy="358" r="5" fill="#A06830"/><circle cx="204" cy="363" r="5" fill="#A06830"/><circle cx="216" cy="360" r="5" fill="#A06830"/>
-          <!-- Crown -->
           <path d="M130 130 L145 110 L158 125 L170 105 L182 125 L195 110 L210 130 Z" fill="#FFD700" stroke="#FF9500" stroke-width="1"/>
           <circle cx="145" cy="110" r="5" fill="#FF4F7B"/>
           <circle cx="170" cy="105" r="5" fill="#FF4F7B"/>
@@ -684,91 +641,51 @@ footer::before{
       <!-- RIGHT: Rose Bouquet -->
       <div class="teddy-side" style="flex:0 0 auto;padding-bottom:20px">
         <svg width="160" height="280" viewBox="0 0 160 280" xmlns="http://www.w3.org/2000/svg">
-          <!-- Stems -->
           <path d="M50 260 Q55 200 70 160" fill="none" stroke="#2d7a2d" stroke-width="3.5" stroke-linecap="round"/>
           <path d="M80 265 Q80 200 80 155" fill="none" stroke="#2d7a2d" stroke-width="3.5" stroke-linecap="round"/>
           <path d="M110 260 Q105 200 95 160" fill="none" stroke="#2d7a2d" stroke-width="3.5" stroke-linecap="round"/>
           <path d="M40 258 Q48 205 60 175" fill="none" stroke="#2d7a2d" stroke-width="3" stroke-linecap="round"/>
           <path d="M120 258 Q112 205 102 178" fill="none" stroke="#2d7a2d" stroke-width="3" stroke-linecap="round"/>
-          <!-- Leaves -->
           <ellipse cx="62" cy="210" rx="14" ry="7" fill="#3a9a3a" transform="rotate(-30 62 210)"/>
           <ellipse cx="98" cy="215" rx="14" ry="7" fill="#3a9a3a" transform="rotate(25 98 215)"/>
           <ellipse cx="55" cy="185" rx="12" ry="6" fill="#4ab04a" transform="rotate(-40 55 185)"/>
           <ellipse cx="105" cy="188" rx="12" ry="6" fill="#4ab04a" transform="rotate(35 105 188)"/>
-          <!-- Rose 1 (center, largest) deep red -->
           <g transform="translate(80,138)">
-            <circle r="18" fill="#8B0000"/>
-            <circle r="14" fill="#AA0000"/>
-            <circle r="10" fill="#CC2222"/>
-            <circle r="7" fill="#DD3333"/>
-            <circle r="4" fill="#EE5555"/>
-            <!-- Petals outer -->
-            <ellipse cx="0" cy="-20" rx="8" ry="12" fill="#8B0000" opacity=".9" transform="rotate(0)"/>
-            <ellipse cx="0" cy="-20" rx="8" ry="12" fill="#8B0000" opacity=".9" transform="rotate(60)"/>
-            <ellipse cx="0" cy="-20" rx="8" ry="12" fill="#8B0000" opacity=".9" transform="rotate(120)"/>
-            <ellipse cx="0" cy="-20" rx="8" ry="12" fill="#9B1111" opacity=".9" transform="rotate(180)"/>
-            <ellipse cx="0" cy="-20" rx="8" ry="12" fill="#9B1111" opacity=".9" transform="rotate(240)"/>
-            <ellipse cx="0" cy="-20" rx="8" ry="12" fill="#9B1111" opacity=".9" transform="rotate(300)"/>
+            <circle r="18" fill="#8B0000"/><circle r="14" fill="#AA0000"/><circle r="10" fill="#CC2222"/><circle r="7" fill="#DD3333"/><circle r="4" fill="#EE5555"/>
+            <ellipse cx="0" cy="-20" rx="8" ry="12" fill="#8B0000" opacity=".9" transform="rotate(0)"/><ellipse cx="0" cy="-20" rx="8" ry="12" fill="#8B0000" opacity=".9" transform="rotate(60)"/>
+            <ellipse cx="0" cy="-20" rx="8" ry="12" fill="#8B0000" opacity=".9" transform="rotate(120)"/><ellipse cx="0" cy="-20" rx="8" ry="12" fill="#9B1111" opacity=".9" transform="rotate(180)"/>
+            <ellipse cx="0" cy="-20" rx="8" ry="12" fill="#9B1111" opacity=".9" transform="rotate(240)"/><ellipse cx="0" cy="-20" rx="8" ry="12" fill="#9B1111" opacity=".9" transform="rotate(300)"/>
           </g>
-          <!-- Rose 2 (left) bright red -->
           <g transform="translate(54,155)">
-            <circle r="15" fill="#CC0000"/>
-            <circle r="11" fill="#DD2222"/>
-            <circle r="7" fill="#EE4444"/>
-            <circle r="4" fill="#FF6666"/>
-            <ellipse cx="0" cy="-17" rx="7" ry="10" fill="#CC0000" opacity=".9" transform="rotate(0)"/>
-            <ellipse cx="0" cy="-17" rx="7" ry="10" fill="#CC0000" opacity=".9" transform="rotate(72)"/>
-            <ellipse cx="0" cy="-17" rx="7" ry="10" fill="#CC0000" opacity=".9" transform="rotate(144)"/>
-            <ellipse cx="0" cy="-17" rx="7" ry="10" fill="#DD1111" opacity=".9" transform="rotate(216)"/>
+            <circle r="15" fill="#CC0000"/><circle r="11" fill="#DD2222"/><circle r="7" fill="#EE4444"/><circle r="4" fill="#FF6666"/>
+            <ellipse cx="0" cy="-17" rx="7" ry="10" fill="#CC0000" opacity=".9" transform="rotate(0)"/><ellipse cx="0" cy="-17" rx="7" ry="10" fill="#CC0000" opacity=".9" transform="rotate(72)"/>
+            <ellipse cx="0" cy="-17" rx="7" ry="10" fill="#CC0000" opacity=".9" transform="rotate(144)"/><ellipse cx="0" cy="-17" rx="7" ry="10" fill="#DD1111" opacity=".9" transform="rotate(216)"/>
             <ellipse cx="0" cy="-17" rx="7" ry="10" fill="#DD1111" opacity=".9" transform="rotate(288)"/>
           </g>
-          <!-- Rose 3 (right) -->
           <g transform="translate(106,158)">
-            <circle r="15" fill="#B80000"/>
-            <circle r="11" fill="#CC1111"/>
-            <circle r="7" fill="#DD3333"/>
-            <circle r="4" fill="#EE5555"/>
-            <ellipse cx="0" cy="-17" rx="7" ry="10" fill="#B80000" opacity=".9" transform="rotate(0)"/>
-            <ellipse cx="0" cy="-17" rx="7" ry="10" fill="#B80000" opacity=".9" transform="rotate(72)"/>
-            <ellipse cx="0" cy="-17" rx="7" ry="10" fill="#B80000" opacity=".9" transform="rotate(144)"/>
-            <ellipse cx="0" cy="-17" rx="7" ry="10" fill="#C80808" opacity=".9" transform="rotate(216)"/>
+            <circle r="15" fill="#B80000"/><circle r="11" fill="#CC1111"/><circle r="7" fill="#DD3333"/><circle r="4" fill="#EE5555"/>
+            <ellipse cx="0" cy="-17" rx="7" ry="10" fill="#B80000" opacity=".9" transform="rotate(0)"/><ellipse cx="0" cy="-17" rx="7" ry="10" fill="#B80000" opacity=".9" transform="rotate(72)"/>
+            <ellipse cx="0" cy="-17" rx="7" ry="10" fill="#B80000" opacity=".9" transform="rotate(144)"/><ellipse cx="0" cy="-17" rx="7" ry="10" fill="#C80808" opacity=".9" transform="rotate(216)"/>
             <ellipse cx="0" cy="-17" rx="7" ry="10" fill="#C80808" opacity=".9" transform="rotate(288)"/>
           </g>
-          <!-- Rose 4 (back left small) -->
           <g transform="translate(40,168)">
-            <circle r="12" fill="#990000"/>
-            <circle r="8" fill="#AA1111"/>
-            <circle r="5" fill="#CC3333"/>
-            <ellipse cx="0" cy="-14" rx="6" ry="8" fill="#990000" opacity=".85" transform="rotate(0)"/>
-            <ellipse cx="0" cy="-14" rx="6" ry="8" fill="#990000" opacity=".85" transform="rotate(90)"/>
-            <ellipse cx="0" cy="-14" rx="6" ry="8" fill="#990000" opacity=".85" transform="rotate(180)"/>
-            <ellipse cx="0" cy="-14" rx="6" ry="8" fill="#990000" opacity=".85" transform="rotate(270)"/>
+            <circle r="12" fill="#990000"/><circle r="8" fill="#AA1111"/><circle r="5" fill="#CC3333"/>
+            <ellipse cx="0" cy="-14" rx="6" ry="8" fill="#990000" opacity=".85" transform="rotate(0)"/><ellipse cx="0" cy="-14" rx="6" ry="8" fill="#990000" opacity=".85" transform="rotate(90)"/>
+            <ellipse cx="0" cy="-14" rx="6" ry="8" fill="#990000" opacity=".85" transform="rotate(180)"/><ellipse cx="0" cy="-14" rx="6" ry="8" fill="#990000" opacity=".85" transform="rotate(270)"/>
           </g>
-          <!-- Rose 5 (back right small) -->
           <g transform="translate(120,170)">
-            <circle r="12" fill="#A50000"/>
-            <circle r="8" fill="#BB1111"/>
-            <circle r="5" fill="#CC3333"/>
-            <ellipse cx="0" cy="-14" rx="6" ry="8" fill="#A50000" opacity=".85" transform="rotate(0)"/>
-            <ellipse cx="0" cy="-14" rx="6" ry="8" fill="#A50000" opacity=".85" transform="rotate(90)"/>
-            <ellipse cx="0" cy="-14" rx="6" ry="8" fill="#A50000" opacity=".85" transform="rotate(180)"/>
-            <ellipse cx="0" cy="-14" rx="6" ry="8" fill="#A50000" opacity=".85" transform="rotate(270)"/>
+            <circle r="12" fill="#A50000"/><circle r="8" fill="#BB1111"/><circle r="5" fill="#CC3333"/>
+            <ellipse cx="0" cy="-14" rx="6" ry="8" fill="#A50000" opacity=".85" transform="rotate(0)"/><ellipse cx="0" cy="-14" rx="6" ry="8" fill="#A50000" opacity=".85" transform="rotate(90)"/>
+            <ellipse cx="0" cy="-14" rx="6" ry="8" fill="#A50000" opacity=".85" transform="rotate(180)"/><ellipse cx="0" cy="-14" rx="6" ry="8" fill="#A50000" opacity=".85" transform="rotate(270)"/>
           </g>
-          <!-- Baby's breath / white flowers accent -->
-          <circle cx="65" cy="148" r="4" fill="white" opacity=".7"/>
-          <circle cx="95" cy="145" r="3.5" fill="white" opacity=".65"/>
-          <circle cx="72" cy="162" r="3" fill="white" opacity=".6"/>
-          <circle cx="88" cy="165" r="3.5" fill="white" opacity=".65"/>
-          <circle cx="46" cy="158" r="3" fill="white" opacity=".55"/>
-          <circle cx="115" cy="155" r="3" fill="white" opacity=".55"/>
-          <!-- Ribbon wrap at base of bouquet -->
+          <circle cx="65" cy="148" r="4" fill="white" opacity=".7"/><circle cx="95" cy="145" r="3.5" fill="white" opacity=".65"/>
+          <circle cx="72" cy="162" r="3" fill="white" opacity=".6"/><circle cx="88" cy="165" r="3.5" fill="white" opacity=".65"/>
+          <circle cx="46" cy="158" r="3" fill="white" opacity=".55"/><circle cx="115" cy="155" r="3" fill="white" opacity=".55"/>
           <rect x="55" y="230" width="50" height="18" rx="5" fill="#FF4F7B" opacity=".85"/>
           <path d="M55 239 Q80 244 105 239" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2"/>
-          <!-- Bow -->
           <path d="M72 230 Q65 218 58 222 Q62 232 72 230Z" fill="#FF4F7B"/>
           <path d="M88 230 Q95 218 102 222 Q98 232 88 230Z" fill="#FF4F7B"/>
           <circle cx="80" cy="230" r="6" fill="#FFD700"/>
-          <!-- Paw hint -->
           <circle cx="80" cy="268" r="10" fill="#D2691E" opacity=".65"/>
           <circle cx="72" cy="273" r="5" fill="#A06830" opacity=".5"/>
           <circle cx="80" cy="278" r="5" fill="#A06830" opacity=".5"/>
@@ -779,14 +696,14 @@ footer::before{
 
     <div class="teddy-caption reveal">
       <p style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;color:rgba(255,220,235,.85);line-height:1.9">
-        This little teddy was made just for you — stuffed with love, warmth, and joy. Holding balloons of happiness in one paw, and the most beautiful roses for you in the other. 💕
+        This little teddy was made just for you; stuffed with love, warmth, and joy. Holding balloons of happiness in one paw, and the most beautiful roses for you in the other. 💕
       </p>
-      <p style="font-family:'Dancing Script',cursive;color:var(--gold);font-size:1.4rem;margin-top:.8rem">— Always yours 🌹</p>
+      <p style="font-family:'Dancing Script',cursive;color:var(--gold);font-size:1.4rem;margin-top:.8rem">— Always yours🌹</p>
     </div>
   </div>
 </section>
 
-<!-- WISHES SECTION — REDESIGNED -->
+<!-- WISHES SECTION — Bestie focused, full of love and respect -->
 <section id="wishes">
   <div style="max-width:1000px;margin:0 auto">
     <div class="reveal">
@@ -794,73 +711,36 @@ footer::before{
       <p class="sec-sub">Words woven with love, just for you 💌</p>
     </div>
     <div class="wishes-masonry reveal">
-
-      <!-- Card 1 — Rose pink -->
       <div class="wish-card-new" style="--wbg:rgba(255,79,123,.12);--wborder:rgba(255,79,123,.3);--wshadow:rgba(255,79,123,.25);">
         <div class="wc-bg"></div>
         <div class="wish-ribbon-top" style="--wribbon:linear-gradient(90deg,#FF4F7B,#FFD700)"></div>
-        <div class="wc-content">
-          <span class="wish-emoji">🌹</span>
-          <p class="wish-quote" style="color:rgba(255,220,230,.9)">"May this year bring you everything your heart quietly desires — and a few beautiful surprises you never saw coming."</p>
-          <div class="wish-author" style="color:rgba(255,180,200,.7)">— From the universe, with love</div>
-        </div>
+        <div class="wc-content"><span class="wish-emoji">🌹</span><p class="wish-quote" style="color:rgba(255,220,230,.9)">"You were never just a mentor — you became my best friend, my safe harbor. I respect you more with each passing day, and I love you like family."</p><div class="wish-author" style="color:rgba(255,180,200,.7)">— With all my heart</div></div>
       </div>
-
-      <!-- Card 2 — Gold -->
       <div class="wish-card-new" style="--wbg:rgba(255,215,0,.1);--wborder:rgba(255,215,0,.3);--wshadow:rgba(255,215,0,.2);">
         <div class="wc-bg"></div>
         <div class="wish-ribbon-top" style="--wribbon:linear-gradient(90deg,#FFD700,#FF6B6B)"></div>
-        <div class="wc-content">
-          <span class="wish-emoji">⭐</span>
-          <p class="wish-quote" style="color:rgba(255,255,220,.9)">"You deserve love that feels like sunrise — warm, certain, and something to look forward to every single morning."</p>
-          <div class="wish-author" style="color:rgba(255,220,120,.7)">— With golden wishes</div>
-        </div>
+        <div class="wc-content"><span class="wish-emoji">⭐</span><p class="wish-quote" style="color:rgba(255,255,220,.9)">"Distance means so little when someone means so much. Every memory with you is stitched with gold. Keep shining, beautiful soul."</p><div class="wish-author" style="color:rgba(255,220,120,.7)">— Across the miles</div></div>
       </div>
-
-      <!-- Card 3 — Lilac/mint -->
       <div class="wish-card-new" style="--wbg:rgba(200,162,200,.1);--wborder:rgba(200,162,200,.3);--wshadow:rgba(200,162,200,.2);">
         <div class="wc-bg"></div>
         <div class="wish-ribbon-top" style="--wribbon:linear-gradient(90deg,#C8A2C8,#98F5E1)"></div>
-        <div class="wc-content">
-          <span class="wish-emoji">✨</span>
-          <p class="wish-quote" style="color:rgba(230,210,255,.9)">"May laughter be your constant companion, joy your faithful friend, and happiness your permanent address all year long."</p>
-          <div class="wish-author" style="color:rgba(200,162,200,.7)">— Always wishing you well</div>
-        </div>
+        <div class="wc-content"><span class="wish-emoji">✨</span><p class="wish-quote" style="color:rgba(230,210,255,.9)">"May laughter be your constant companion, joy your faithful friend, and happiness your permanent address all year long. You deserve the world, bestie."</p><div class="wish-author" style="color:rgba(200,162,200,.7)">— Always wishing you well</div></div>
       </div>
-
-      <!-- Card 4 — Deep rose, spans wide on desktop -->
       <div class="wish-card-new" style="--wbg:rgba(180,0,80,.15);--wborder:rgba(255,100,150,.3);--wshadow:rgba(255,79,123,.3);">
         <div class="wc-bg"></div>
         <div class="wish-ribbon-top" style="--wribbon:linear-gradient(90deg,#FF4F7B,#C8A2C8,#FFD700)"></div>
-        <div class="wc-content">
-          <span class="wish-emoji">💖</span>
-          <p class="wish-quote" style="color:rgba(255,210,230,.9)">"The world is genuinely a better place with you in it. Your kindness, your light, your laughter — they are irreplaceable gifts to everyone lucky enough to know you."</p>
-          <div class="wish-author" style="color:rgba(255,150,180,.7)">— Someone who truly sees you</div>
-        </div>
+        <div class="wc-content"><span class="wish-emoji">💖</span><p class="wish-quote" style="color:rgba(255,210,230,.9)">"The world is genuinely a better place with you in it. Your kindness, your light, your laughter — they are irreplaceable gifts to everyone lucky enough to know you."</p><div class="wish-author" style="color:rgba(255,150,180,.7)">— Someone who truly sees you</div></div>
       </div>
-
-      <!-- Card 5 — Starry night -->
       <div class="wish-card-new" style="--wbg:rgba(60,0,100,.25);--wborder:rgba(180,120,255,.3);--wshadow:rgba(150,80,255,.2);">
         <div class="wc-bg"></div>
         <div class="wish-ribbon-top" style="--wribbon:linear-gradient(90deg,#7B2FFF,#FF4F7B)"></div>
-        <div class="wc-content">
-          <span class="wish-emoji">🌙</span>
-          <p class="wish-quote" style="color:rgba(220,200,255,.9)">"On the nights you feel small, look up — the same stars that light the sky think you are absolutely worth shining for."</p>
-          <div class="wish-author" style="color:rgba(180,140,255,.7)">— Stargazing for you</div>
-        </div>
+        <div class="wc-content"><span class="wish-emoji">🌙</span><p class="wish-quote" style="color:rgba(220,200,255,.9)">"On the nights you feel small, look up — the same stars that light the sky think you are absolutely worth shining for. You are my star, always."</p><div class="wish-author" style="color:rgba(180,140,255,.7)">— Stargazing for you</div></div>
       </div>
-
-      <!-- Card 6 — Warm coral -->
       <div class="wish-card-new" style="--wbg:rgba(255,107,107,.1);--wborder:rgba(255,107,107,.3);--wshadow:rgba(255,107,107,.2);">
         <div class="wc-bg"></div>
         <div class="wish-ribbon-top" style="--wribbon:linear-gradient(90deg,#FF6B6B,#FFD700)"></div>
-        <div class="wc-content">
-          <span class="wish-emoji">🎂</span>
-          <p class="wish-quote" style="color:rgba(255,230,210,.9)">"Another year of you is the greatest gift the world could receive. Happy birthday to someone truly, wonderfully, irreplaceably extraordinary."</p>
-          <div class="wish-author" style="color:rgba(255,180,130,.7)">— Celebrating you always</div>
-        </div>
+        <div class="wc-content"><span class="wish-emoji">🎂</span><p class="wish-quote" style="color:rgba(255,230,210,.9)">"Another year of you is the greatest gift the world could receive. Happy birthday to someone truly, wonderfully, irreplaceably extraordinary — my best friend."</p><div class="wish-author" style="color:rgba(255,180,130,.7)">— Celebrating you always</div></div>
       </div>
-
     </div>
   </div>
 </section>
@@ -881,7 +761,7 @@ footer::before{
   </div>
 </section>
 
-<!-- LOVE LETTER -->
+<!-- LOVE LETTER - Perfect Bestie Version -->
 <section id="letter">
   <div style="max-width:680px;margin:0 auto">
     <div class="reveal">
@@ -890,28 +770,28 @@ footer::before{
     </div>
     <div class="letter-paper reveal">
       <p class="letter-body">
-        Dear wonderful you,<br><br>
-        On this beautiful day that the world gets to celebrate you, I want you to know something: you are not just remembered — you are <em>cherished</em>. Your laugh is someone's favourite sound. Your presence is someone's safe place. The way you care, the way you love, the way you exist in this world — it matters.<br><br>
-        This past year may have had its storms, but you weathered every single one. And that makes you braver than you believe, stronger than you feel, and more loved than you could possibly imagine.<br><br>
-        So today — eat the cake. Dance a little. Let yourself be celebrated. You deserve every single moment of it.<br><br>
-        With all the love in the world,
+        My Dearest Kind Hearted One,<br><br>
+        On this beautiful day that the world gets to celebrate you, I want you to know something: you are not just remembered,you are cherished. Your laugh is someone's favourite sound. Your presence is someone's safe place. The way you care, the way you love, the way you exist in this world, it matters.<br><br>
+        There are people who come into our lives and change the way we see the world. You are one of those rare souls. Though our paths are diverging, the love, respect, and friendship we share will remain untouched by distance. You are more than a best friend, you are a piece of my heart that travels with me everywhere.<br><br>
+        Wherever you go, may you find kindness, may you be celebrated, and may you always remember that someone out there is cheering for your wildest dreams. Thank you for every lesson, every laugh and every moment. I will carry you with me, always.<br><br>
+        With all the love in universe, 🌹<br>
       </p>
-      <div class="letter-sig">— Someone who cares deeply 🌹</div>
+      <div class="letter-sig">— Someone who cares deeply</div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER — themed -->
+<!-- FOOTER -->
 <footer>
   <div style="font-size:2.8rem;margin-bottom:.8rem;position:relative;z-index:1">🎂</div>
   <p style="color:rgba(255,215,0,.85);font-family:'Dancing Script',cursive;font-size:1.5rem;margin-bottom:.5rem;position:relative;z-index:1">Made with heaps of love, just for you</p>
-  <p style="color:rgba(255,180,200,.4);font-size:.8rem;font-family:'Nunito',sans-serif;letter-spacing:2px;position:relative;z-index:1">✦ Wishing you the most magical birthday ever ✦</p>
+  <p style="color:rgba(255,180,200,.4);font-size:.8rem;font-family:'Nunito',sans-serif;letter-spacing:2px;position:relative;z-index:1">✦ Distance can't dim our bond. Wishing you the most magical birthday ever ✦</p>
 </footer>
 
 </div><!-- end #main -->
 
 <script>
-// ══════ PIN ══════
+// PIN
 const SECRET='2605';
 let pinVal='';
 function pinKey(d){if(pinVal.length>=4)return;pinVal+=d;updateDots();if(pinVal.length===4)setTimeout(checkPin,200)}
@@ -934,26 +814,39 @@ function checkPin(){
   }
 }
 
-// ══════ ENTER MAIN ══════
 function enterMain(){
   const burst=document.getElementById('burst');
   burst.style.transition='opacity .6s ease';burst.style.opacity='0';
   setTimeout(()=>burst.style.display='none',600);
   document.getElementById('main').style.display='block';
-  buildStars();buildFloatingHearts();buildPetals();buildBgHearts();
+  buildStars();buildFloatingHearts();buildPetals();buildBgHearts();buildAccentHearts();
   startTimer();
   setTimeout(revealObserver,120);
-  // Start background music (love.mp3) on user gesture
   const audio=document.getElementById('bgMusic');
   audio.volume=0.55;
   audio.play().catch(()=>{
-    // Autoplay blocked — try on next interaction
-    document.addEventListener('click',()=>{audio.play()},{once:true});
-    document.addEventListener('touchstart',()=>{audio.play()},{once:true});
+    document.addEventListener('click',()=>audio.play(),{once:true});
+    document.addEventListener('touchstart',()=>audio.play(),{once:true});
   });
 }
 
-// ══════ CONFETTI ══════
+// Additional aesthetic hearts
+function buildAccentHearts(){
+  const container=document.getElementById('accentHearts');
+  if(!container) return;
+  for(let i=0;i<40;i++){
+    const heart=document.createElement('div');
+    heart.className='accent-heart';
+    heart.innerHTML=Math.random()>0.6?'❤️':'💖';
+    heart.style.left=Math.random()*100+'%';
+    heart.style.fontSize=(Math.random()*1.2+0.8)+'rem';
+    heart.style.animationDelay=Math.random()*20+'s';
+    heart.style.animationDuration=Math.random()*20+15+'s';
+    container.appendChild(heart);
+  }
+}
+
+// CONFETTI
 const cvs=document.getElementById('cvs');
 const ctx=cvs.getContext('2d');
 let pieces=[],confRunning=false;
@@ -978,20 +871,15 @@ function animConf(){
   if(pieces.length){requestAnimationFrame(animConf)}else{confRunning=false;ctx.clearRect(0,0,cvs.width,cvs.height)}
 }
 
-// ══════ STARS ══════
 function buildStars(){
   const sf=document.getElementById('stars');sf.innerHTML='';
   for(let i=0;i<100;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2.5+.4;s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*5}s;animation-duration:${Math.random()*2+1.5}s`;sf.appendChild(s)}
 }
-
-// ══════ FLOATING HEARTS ══════
 function buildFloatingHearts(){
   const fh=document.getElementById('fhearts');fh.innerHTML='';
   const h=['💕','💖','💗','💓','💝','🌹','✨','💫','🌸'];
   for(let i=0;i<14;i++){const el=document.createElement('div');el.className='fheart';el.textContent=h[~~(Math.random()*h.length)];el.style.cssText=`left:${Math.random()*100}%;animation-duration:${Math.random()*8+6}s;animation-delay:${Math.random()*8}s;font-size:${Math.random()*1.2+.9}rem`;fh.appendChild(el)}
 }
-
-// ══════ BG HEARTS (global background) ══════
 function buildBgHearts(){
   const bgh=document.getElementById('bg-hearts');bgh.innerHTML='';
   const h=['❤','💕','🌹','💖','💗','✨','💝','🌸','⭐','💫'];
@@ -1002,63 +890,44 @@ function buildBgHearts(){
     bgh.appendChild(el);
   }
 }
-
-// ══════ PETALS ══════
 function buildPetals(){
   const p=['🌸','🌺','🌷','🌹','💮'];
   for(let i=0;i<10;i++){const el=document.createElement('div');el.className='petal';el.textContent=p[~~(Math.random()*p.length)];el.style.cssText=`left:${Math.random()*100}%;animation-duration:${Math.random()*10+8}s;animation-delay:${Math.random()*10}s;font-size:${Math.random()*.8+.7}rem`;document.body.appendChild(el)}
 }
-
-// ══════ GIFTS ══════
 const openedG=new Set();
 function openGift(boxId,msgId,emoji){
   if(openedG.has(boxId))return;openedG.add(boxId);
   const box=document.getElementById(boxId),msg=document.getElementById(msgId);
   box.classList.add('opened');box.textContent=emoji;msg.classList.add('show');
   startConfetti();
-  const h=['💖','💕','✨','🌟','💝','🌹'];
-  for(let i=0;i<14;i++){const el=document.createElement('div');el.textContent=h[~~(Math.random()*h.length)];el.style.cssText=`position:fixed;left:${30+Math.random()*40}%;top:${35+Math.random()*30}%;font-size:${Math.random()*1.5+.9}rem;pointer-events:none;z-index:1000;animation:fadeUp .9s ease ${Math.random()*.35}s forwards;opacity:0`;document.body.appendChild(el);setTimeout(()=>el.remove(),1300)}
 }
-
-// ══════ CAKE — BLOW CANDLES ══════
 let candlesBlown=false;
 function blowCandles(){
   if(candlesBlown)return;
   candlesBlown=true;
-  // Fade out each flame with stagger
   ['fl1','fl2','fl3','fl4','fl5'].forEach((id,i)=>{
     setTimeout(()=>{
       const el=document.getElementById(id);
       if(el)el.classList.add('out');
     },i*180);
   });
-  // Show wish popup after all out
   setTimeout(()=>{
-    const name=document.getElementById('cakeName').value.trim();
     const popup=document.getElementById('cakePopup');
     const wishName=document.getElementById('cakeWishName');
     const wishText=document.getElementById('cakeWishText');
-    wishName.textContent=name?`🎂 Happy Birthday, ${name}! 🎂`:'🎂 Happy Birthday! 🎂';
-    wishText.textContent=name
-      ?`${name}, may every candle wish you blew out tonight come true — and may this year be your most beautiful yet! ✨🌟💖`
-      :'May every wish you made tonight come true, and may this year be your most beautiful yet! ✨🌟💖';
+    wishName.textContent='🎂 Happy Birthday, Best Person! 🎂';
+    wishText.textContent='My dearest Best Person, may every candle wish you blow out tonight come true — and may this year be your most beautiful yet. No matter the distance, I am always celebrating you. ✨🌟💖';
     popup.classList.add('show');
     startConfetti();
   },1200);
 }
-
-// ══════ TIMER ══════
 let startTime=null;
 function startTimer(){startTime=Date.now();setInterval(tickTimer,1000)}
 function tickTimer(){const d=Math.floor((Date.now()-startTime)/1000),h=Math.floor(d/3600),m=Math.floor((d%3600)/60),s=d%60;document.getElementById('th').textContent=String(h).padStart(2,'0');document.getElementById('tm').textContent=String(m).padStart(2,'0');document.getElementById('ts').textContent=String(s).padStart(2,'0')}
-
-// ══════ SCROLL REVEAL ══════
 function revealObserver(){
   const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')}),{threshold:.08,rootMargin:'0px 0px -40px 0px'});
   document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*.12)+'s';obs.observe(el)});
 }
-
-// ══════ POPPINS WISH FONT (already loaded via Google Fonts) ══════
 </script>
 </body>
 </html>
